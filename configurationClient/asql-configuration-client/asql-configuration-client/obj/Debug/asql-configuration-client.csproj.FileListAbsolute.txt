@@ -1,0 +1,7 @@
+C:\Users\brushing0895\Downloads\asql-configuration-client\asql-configuration-client\asql-configuration-client\bin\Debug\asql-configuration-client.exe.config
+C:\Users\brushing0895\Downloads\asql-configuration-client\asql-configuration-client\asql-configuration-client\bin\Debug\asql-configuration-client.exe
+C:\Users\brushing0895\Downloads\asql-configuration-client\asql-configuration-client\asql-configuration-client\bin\Debug\asql-configuration-client.pdb
+C:\Users\brushing0895\Downloads\asql-configuration-client\asql-configuration-client\asql-configuration-client\obj\Debug\asql-configuration-client.csprojAssemblyReference.cache
+C:\Users\brushing0895\Downloads\asql-configuration-client\asql-configuration-client\asql-configuration-client\obj\Debug\asql-configuration-client.csproj.CoreCompileInputs.cache
+C:\Users\brushing0895\Downloads\asql-configuration-client\asql-configuration-client\asql-configuration-client\obj\Debug\asql-configuration-client.exe
+C:\Users\brushing0895\Downloads\asql-configuration-client\asql-configuration-client\asql-configuration-client\obj\Debug\asql-configuration-client.pdb
