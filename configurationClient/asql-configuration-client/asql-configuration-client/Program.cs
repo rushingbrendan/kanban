@@ -1,9 +1,10 @@
 ﻿/*  Course:         PROG3070 - Advanced SQL
  *  Assignment:     SQL Database data visualization in chart
- *  Programmer:     Brendan Rushing 6020895
+ *  Programmer:     Brendan Rushing, Tudor Lupu
  *  Date:           3/14/2019
  *  
- *  Description:
+ *  Description:    A script to insert configurations into the
+ *                  database using the Configuration Table
  * 
  * 
  * 
@@ -74,7 +75,6 @@ namespace asql_configuration_client
                 //read from app.config
                 this.connectionString = ConfigurationManager.AppSettings["databaseConnectionString"].ToString();  //connection string
                 int.TryParse(ConfigurationManager.AppSettings["harnessQuantity"], out reflectorValue);  
-
                 int.TryParse(ConfigurationManager.AppSettings["reflectorQuantity"], out housingValue); 
                 int.TryParse(ConfigurationManager.AppSettings["housingQuantity"], out harnessValue); 
                 int.TryParse(ConfigurationManager.AppSettings["lensQuantity"], out lensValue);  
