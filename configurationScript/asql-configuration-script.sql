@@ -21,6 +21,7 @@ CREATE TABLE ConfigurationTable (
 	experiencedDefectRate DECIMAL(10,2) NOT NULL,
 	rookieAssemblyTime INT NOT NULL,
 	normalAssemblyTime INT NOT NULL,
-	experiencedAssemblyTime INT NOT NULL
+	experiencedAssemblyTime INT NOT NULL,
+	timeScale INT NOT NULL
 
 );

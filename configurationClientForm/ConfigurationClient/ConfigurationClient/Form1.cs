@@ -53,6 +53,8 @@ namespace ConfigurationClient
         private int numberOfStations { get; set; }
         private int testTraySize { get; set; }
 
+        private int timeScale { get; set; }
+
         private string queryString { get; set; }
 
         /// <summary>
@@ -90,6 +92,7 @@ namespace ConfigurationClient
             int runnerCollectionValue = 0;
             int numberOfStationsValue = 0;
             int testTraySizeValue = 0;
+            int timeScaleValue = 0;
 
             //get from UI layer
             int.TryParse(harnessInput.Text, out harnessValue);
@@ -111,6 +114,8 @@ namespace ConfigurationClient
             int.TryParse(numberOfStationsInput.Text, out numberOfStationsValue);
             int.TryParse(testTraySizeInput.Text, out testTraySizeValue);
 
+            int.TryParse(timeScaleInput.Text, out timeScaleValue);
+
             //send to class variables
             harnessQuantity = harnessValue;
             reflectorQuantity = reflectorValue;
@@ -130,6 +135,7 @@ namespace ConfigurationClient
             runnerCollectionTimeCycle = runnerCollectionValue;
             numberOfStations = numberOfStationsValue;
             testTraySize = testTraySizeValue;
+            timeScale = timeScaleValue;
         }
 
         /// <summary>
@@ -139,7 +145,7 @@ namespace ConfigurationClient
         {
 
             //update query string
-            queryString = $"INSERT INTO ConfigurationTable(harnessQuantity, reflectorQuantity, housingQuantity, lensQuantity, bulbQuantity, bezelQuantity,  runnerCollectionTimeCycle, numberOfStations, testTraySize, rookieDefectRate, normalDefectRate, experiencedDefectRate, rookieAssemblyTime, normalAssemblyTime, experiencedAssemblyTime) VALUES({this.harnessQuantity}, {this.reflectorQuantity}, {this.housingQuantity}, {this.lensQuantity}, {this.bulbQuantity}, {this.bezelQuantity} , {this.runnerCollectionTimeCycle}, {this.numberOfStations}, {this.testTraySize}, {this.rookieDefectRate}, {this.normalDefectRate}, {this.experiencedDefectRate}, {this.rookieAssemblyTime}, {this.normalAssemblyTime}, {this.experiencedAssemblyTime})";
+            queryString = $"INSERT INTO ConfigurationTable(harnessQuantity, reflectorQuantity, housingQuantity, lensQuantity, bulbQuantity, bezelQuantity,  runnerCollectionTimeCycle, numberOfStations, testTraySize, rookieDefectRate, normalDefectRate, experiencedDefectRate, rookieAssemblyTime, normalAssemblyTime, experiencedAssemblyTime, timeScale) VALUES({this.harnessQuantity}, {this.reflectorQuantity}, {this.housingQuantity}, {this.lensQuantity}, {this.bulbQuantity}, {this.bezelQuantity} , {this.runnerCollectionTimeCycle}, {this.numberOfStations}, {this.testTraySize}, {this.rookieDefectRate}, {this.normalDefectRate}, {this.experiencedDefectRate}, {this.rookieAssemblyTime}, {this.normalAssemblyTime}, {this.experiencedAssemblyTime}, {this.timeScale})";
         }    
 
         /// <summary>
@@ -232,6 +238,9 @@ namespace ConfigurationClient
 
         }
 
-
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SelectDatabase();
+        }
     }
 }

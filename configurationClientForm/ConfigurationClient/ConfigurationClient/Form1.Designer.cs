@@ -65,8 +65,10 @@
             this.updateConfigurationButton = new System.Windows.Forms.Button();
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.selectDatabaseButton = new System.Windows.Forms.Button();
             this.databaseSelectedLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.timeScaleInput = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.harnessInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.reflectorInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.housingInput)).BeginInit();
@@ -82,6 +84,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.cardPickUpCycleInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.testTraySizeInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfStationsInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timeScaleInput)).BeginInit();
             this.SuspendLayout();
             // 
             // logOutput
@@ -525,7 +528,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(459, 162);
+            this.label16.Location = new System.Drawing.Point(458, 162);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(182, 20);
             this.label16.TabIndex = 33;
@@ -558,7 +561,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(512, 120);
+            this.label17.Location = new System.Drawing.Point(525, 120);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(109, 20);
             this.label17.TabIndex = 31;
@@ -591,7 +594,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(481, 76);
+            this.label18.Location = new System.Drawing.Point(487, 76);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(146, 20);
             this.label18.TabIndex = 29;
@@ -623,7 +626,7 @@
             // updateConfigurationButton
             // 
             this.updateConfigurationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.updateConfigurationButton.Location = new System.Drawing.Point(485, 334);
+            this.updateConfigurationButton.Location = new System.Drawing.Point(485, 346);
             this.updateConfigurationButton.Name = "updateConfigurationButton";
             this.updateConfigurationButton.Size = new System.Drawing.Size(262, 59);
             this.updateConfigurationButton.TabIndex = 34;
@@ -635,7 +638,7 @@
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(539, 34);
+            this.label19.Location = new System.Drawing.Point(533, 34);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(70, 20);
             this.label19.TabIndex = 35;
@@ -651,31 +654,67 @@
             this.label20.TabIndex = 36;
             this.label20.Text = "Log";
             // 
-            // button1
+            // selectDatabaseButton
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(516, 265);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(138, 39);
-            this.button1.TabIndex = 37;
-            this.button1.Text = "Select Database";
-            this.button1.UseVisualStyleBackColor = true;
+            this.selectDatabaseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.selectDatabaseButton.Location = new System.Drawing.Point(516, 277);
+            this.selectDatabaseButton.Name = "selectDatabaseButton";
+            this.selectDatabaseButton.Size = new System.Drawing.Size(138, 39);
+            this.selectDatabaseButton.TabIndex = 37;
+            this.selectDatabaseButton.Text = "Select Database";
+            this.selectDatabaseButton.UseVisualStyleBackColor = true;
+            this.selectDatabaseButton.Click += new System.EventHandler(this.button1_Click);
             // 
             // databaseSelectedLabel
             // 
             this.databaseSelectedLabel.AutoSize = true;
             this.databaseSelectedLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.databaseSelectedLabel.Location = new System.Drawing.Point(481, 233);
+            this.databaseSelectedLabel.Location = new System.Drawing.Point(481, 245);
             this.databaseSelectedLabel.Name = "databaseSelectedLabel";
             this.databaseSelectedLabel.Size = new System.Drawing.Size(217, 20);
             this.databaseSelectedLabel.TabIndex = 38;
             this.databaseSelectedLabel.Text = "Database Selected: False";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(550, 205);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(87, 20);
+            this.label1.TabIndex = 40;
+            this.label1.Text = "Time Scale";
+            // 
+            // timeScaleInput
+            // 
+            this.timeScaleInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeScaleInput.Location = new System.Drawing.Point(656, 202);
+            this.timeScaleInput.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.timeScaleInput.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.timeScaleInput.Name = "timeScaleInput";
+            this.timeScaleInput.Size = new System.Drawing.Size(74, 26);
+            this.timeScaleInput.TabIndex = 39;
+            this.timeScaleInput.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(759, 638);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.timeScaleInput);
             this.Controls.Add(this.databaseSelectedLabel);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.selectDatabaseButton);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.updateConfigurationButton);
@@ -730,6 +769,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.cardPickUpCycleInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.testTraySizeInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfStationsInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timeScaleInput)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -774,8 +814,10 @@
         private System.Windows.Forms.Button updateConfigurationButton;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button selectDatabaseButton;
         private System.Windows.Forms.Label databaseSelectedLabel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown timeScaleInput;
     }
 }
 

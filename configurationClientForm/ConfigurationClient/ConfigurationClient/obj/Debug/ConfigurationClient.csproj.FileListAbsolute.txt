@@ -1,0 +1,12 @@
+C:\Users\brushing0895\Downloads\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\bin\Debug\ConfigurationClient.exe.config
+C:\Users\brushing0895\Downloads\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\bin\Debug\ConfigurationClient.exe
+C:\Users\brushing0895\Downloads\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\bin\Debug\ConfigurationClient.pdb
+C:\Users\brushing0895\Downloads\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\obj\Debug\ConfigurationClient.csprojAssemblyReference.cache
+C:\Users\brushing0895\Downloads\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\obj\Debug\Interop.MSDASC.dll
+C:\Users\brushing0895\Downloads\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\obj\Debug\ConfigurationClient.csproj.ResolveComReference.cache
+C:\Users\brushing0895\Downloads\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\obj\Debug\ConfigurationClient.Form1.resources
+C:\Users\brushing0895\Downloads\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\obj\Debug\ConfigurationClient.Properties.Resources.resources
+C:\Users\brushing0895\Downloads\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\obj\Debug\ConfigurationClient.csproj.GenerateResource.cache
+C:\Users\brushing0895\Downloads\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\obj\Debug\ConfigurationClient.csproj.CoreCompileInputs.cache
+C:\Users\brushing0895\Downloads\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\obj\Debug\ConfigurationClient.exe
+C:\Users\brushing0895\Downloads\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\obj\Debug\ConfigurationClient.pdb
