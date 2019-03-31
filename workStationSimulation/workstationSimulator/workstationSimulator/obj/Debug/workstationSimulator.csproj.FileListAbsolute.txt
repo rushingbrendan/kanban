@@ -1,0 +1,11 @@
+C:\Users\brushing0895\Downloads\kanban\workStationSimulation\workstationSimulator\workstationSimulator\bin\Debug\workstationSimulator.exe.config
+C:\Users\brushing0895\Downloads\kanban\workStationSimulation\workstationSimulator\workstationSimulator\bin\Debug\workstationSimulator.exe
+C:\Users\brushing0895\Downloads\kanban\workStationSimulation\workstationSimulator\workstationSimulator\bin\Debug\workstationSimulator.pdb
+C:\Users\brushing0895\Downloads\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.csprojAssemblyReference.cache
+C:\Users\brushing0895\Downloads\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.csproj.ResolveComReference.cache
+C:\Users\brushing0895\Downloads\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.Form1.resources
+C:\Users\brushing0895\Downloads\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.Properties.Resources.resources
+C:\Users\brushing0895\Downloads\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.csproj.GenerateResource.cache
+C:\Users\brushing0895\Downloads\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.csproj.CoreCompileInputs.cache
+C:\Users\brushing0895\Downloads\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.exe
+C:\Users\brushing0895\Downloads\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.pdb
