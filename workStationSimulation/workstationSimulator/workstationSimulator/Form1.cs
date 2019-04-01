@@ -96,8 +96,16 @@ namespace workstationSimulator
         }
 
         private void SendTestTray()
-        {
-            int i = 0;
+        {            
+
+            for (int i = 0; i < fogLampAssemblyCount; i++)
+            {
+                //perform insert into table here
+                ExecuteNonQueryCommand("stored procedure name");
+            }
+
+            //reset count
+            fogLampAssemblyCount = 0;
         }
 
         private void GetWorkStationCount()
