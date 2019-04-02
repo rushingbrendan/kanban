@@ -1,4 +1,17 @@
-﻿using System;
+﻿/*  Course: Advanced SQL
+ *  Date:   April 2, 2019
+ *  Assignment: Kanban
+ *  Description:    Kanban single work station simulation
+ * 
+ * 
+ * 
+ * 
+ * 
+ * */
+
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,8 +30,8 @@ namespace workstationSimulator
     {
         static System.Windows.Forms.Timer myTimer = new System.Windows.Forms.Timer();
         static bool exitFlag = false;
-        static int alarmCounter = 1;
 
+        private bool StopWorker = false;
 
         private string sourceConnectionString { get; set; }
         private int numberOfWorkstations { get; set; }
@@ -46,23 +59,15 @@ namespace workstationSimulator
         private int bulbQuantity { get; set; }
         private int bezelQuantity { get; set; }
 
-        private bool harnessOrdered { get; set; }
-        private bool reflectorOrdered { get; set; }
-        private bool housingOrdered { get; set; }
-        private bool lensOrdered { get; set; }
-        private bool bulbOrdered { get; set; }
-        private bool bezelOrdered { get; set; }
 
-        private DateTime? harnessReplenishTime { get; set; }
-        private DateTime? reflectorReplenishTime { get; set; }
-        private DateTime? housingReplenishTime { get; set; }
-        private DateTime? lensReplenishTime { get; set; }
-        private DateTime? bulbReplenishTime { get; set; }
-        private DateTime? bezelReplenishTime { get; set; }
+        private DateTime refillTime { get; set;  }
 
 
         private int fogLampAssemblyCount = 0;
 
+        /// <summary>
+        /// constructor
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
@@ -70,6 +75,9 @@ namespace workstationSimulator
             InitializeForm();
         }
 
+        /// <summary>
+        /// Initialize form elements
+        /// </summary>
         private void InitializeForm()
         {
             //read from app.config
@@ -99,6 +107,9 @@ namespace workstationSimulator
 
         }
 
+        /// <summary>
+        /// send test tray to database server
+        /// </summary>
         private void SendTestTray()
         {
             Random rnd = new Random();
@@ -123,6 +134,11 @@ namespace workstationSimulator
             fogLampAssemblyCount = 0;
         }
 
+        /// <summary>
+        /// check if fog lamp has passed test based on defect rate
+        /// </summary>
+        /// <param name="inputRandom"></param>
+        /// <returns></returns>
         private bool CheckIfFogLampPassedTest(Random inputRandom)
         {
             double currentEmployeeDefectRate = defectRate * 100;
@@ -141,6 +157,9 @@ namespace workstationSimulator
 
         }
 
+        /// <summary>
+        /// Get number of workstations
+        /// </summary>
         private void GetWorkStationCount()
         {
             int workstations = 0;
@@ -158,6 +177,9 @@ namespace workstationSimulator
             }
         }
 
+        /// <summary>
+        /// get time scale value
+        /// </summary>
         private void GetTimeScale()
         {
             int timeScaleValue = 0;
@@ -175,6 +197,9 @@ namespace workstationSimulator
             }
         }
 
+        /// <summary>
+        /// Get assembly time
+        /// </summary>
         private void GetAssemblyTime()
         {
             int returnInt = 0;
@@ -193,6 +218,9 @@ namespace workstationSimulator
             }
         }
 
+        /// <summary>
+        /// get defect rate from server
+        /// </summary>
         private void GetDefectRate()
         {
             double returnDouble = 0;
@@ -234,6 +262,9 @@ namespace workstationSimulator
         }
 
 
+        /// <summary>
+        /// get test tray size from server
+        /// </summary>
         private void GetTestTraySize()
         {
             int returnInt = 0;            
@@ -252,8 +283,11 @@ namespace workstationSimulator
         }
 
 
-
-
+        /// <summary>
+        /// Execute SQL server non query command
+        /// </summary>
+        /// <param name="inputCommand"></param>
+        /// <returns></returns>
         private int ExecuteNonQueryCommand(string inputCommand)
         {            
             try
@@ -275,6 +309,11 @@ namespace workstationSimulator
 
         }
 
+        /// <summary>
+        /// Execute SQL data reader 
+        /// </summary>
+        /// <param name="inputQuery"></param>
+        /// <returns></returns>
         private int ExecuteDataReader(string inputQuery)
         {
             int returnInteger = 0;
@@ -318,10 +357,16 @@ namespace workstationSimulator
             logOutput.ScrollToCaret();
         }
 
+        /// <summary>
+        /// start button click method
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void startButton_Click(object sender, EventArgs e)
         {
             //disable start button
             startButton.Enabled = false;
+            StopWorker = false;
 
             //enable stop button
             stopButton.Enabled = true;
@@ -349,6 +394,11 @@ namespace workstationSimulator
 
         }
 
+        /// <summary>
+        /// stop button click method
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void stopButton_Click(object sender, EventArgs e)
         {
             //disable stop button
@@ -363,125 +413,135 @@ namespace workstationSimulator
             //enable employee skill input
             employeeSkillInput.Enabled = true;
 
+            StopWorker = true;
+
         }
 
+        /// <summary>
+        /// update start time label on form
+        /// </summary>
         private void UpdateStartTime()
         {
             DateTime currentTime = DateTime.Now;
             startTimeLabel.Text = currentTime.ToString();
         }
 
+        /// <summary>
+        /// update current time label
+        /// </summary>
         private void UpdateCurrentTime()
         {
             DateTime currentTime = DateTime.Now;
             currentTimeLabel.Text = currentTime.ToString();
         }
 
+        /// <summary>
+        /// Assemble fog lamp
+        /// </summary>
         private void AssembleFogLamp()
         {
-            int currentAssemblyProgress = 0;
-            int totalAssemblyTime = assemblyTime / timeScale;
+            
 
-            LogEvent($"Started to assemble fog lamp #{fogLampAssemblyCount + 1}");
-
-            //setup progress bar
-            progressBar.Maximum = totalAssemblyTime + 1;
-            progressBar.Value = 0;
-
-
-            do
+            if (StopWorker == false)
             {
-                myTimer.Tick += new EventHandler(TimerEventProcessor);
+                refillTime.AddSeconds(300f / timeScale);
+                int currentAssemblyProgress = 0;
+                int totalAssemblyTime = assemblyTime / timeScale;
 
-                // Sets the timer interval to 1 seconds.
-                myTimer.Interval = 1000;
-                myTimer.Start();
+                LogEvent($"Started to assemble fog lamp #{fogLampAssemblyCount + 1}");
 
-                // Runs the timer, and raises the event.
-                while (exitFlag == false)
+                //setup progress bar
+                progressBar.Maximum = totalAssemblyTime + 1;
+                progressBar.Value = 0;
+
+
+                do
                 {
-                    // Processes all the events in the queue.
-                    Application.DoEvents();
-                }
+                    myTimer.Tick += new EventHandler(TimerEventProcessor);
 
+                    // Sets the timer interval to 1 seconds.
+                    myTimer.Interval = 1000;
+                    myTimer.Start();
+
+                    // Runs the timer, and raises the event.
+                    while (exitFlag == false)
+                    {
+                        // Processes all the events in the queue.
+                        Application.DoEvents();
+                    }
+
+                    exitFlag = false;
+
+                    CheckIfRunnerHasArrived();
+
+                    if (CanFogLampBeAssembled())
+                    {
+
+                        //update 1 second to current progress
+                        UpdateProgressBar(currentAssemblyProgress, totalAssemblyTime);
+                        currentAssemblyProgress++;
+                    }
+                    else
+                    {
+                        LogEvent("Do not have parts available for fog lamp");
+                    }
+                    UpdateCurrentTime();
+
+
+
+
+                } while (currentAssemblyProgress < totalAssemblyTime);
+
+                //update count and flag
                 exitFlag = false;
-
-                CheckPartQuantity();
-
-                CheckIfRunnerHasArrived();
-
-                if (CanFogLampBeAssembled())
-                {
-                                       
-                    //update 1 second to current progress
-                    UpdateProgressBar(currentAssemblyProgress, totalAssemblyTime);
-                    currentAssemblyProgress++;
-                }
-                else
-                {                    
-                    LogEvent("Do not have parts available for fog lamp");
-                }
-                UpdateCurrentTime();
-
-
-
-
-            } while (currentAssemblyProgress < totalAssemblyTime);
-
-            //update count and flag
-            exitFlag = false;
-            FogLampAssemblyCompleted();
-            AssembleFogLamp();
+                FogLampAssemblyCompleted();
+                AssembleFogLamp();
+            }
+            
         }
 
+        /// <summary>
+        /// check if runner has arrived with new parts
+        /// </summary>
         private void CheckIfRunnerHasArrived()
         {
             DateTime currentTime = DateTime.Now;
 
-            if ((harnessReplenishTime < currentTime) && (harnessOrdered))
-            {                
-                harnessOrdered = false;
-                harnessReplenishTime = null;
-                harnessQuantity += harnessInitialQuantity;
-
-            }
-            if ((reflectorReplenishTime < currentTime) && (reflectorOrdered))
+            if (currentTime > refillTime)
             {
-                
-                reflectorOrdered = false;
-                reflectorReplenishTime = null;
-                reflectorQuantity += reflectorInitialQuantity;
+                if (harnessQuantity < 5)
+                {
+                    harnessQuantity += harnessInitialQuantity;
+                }
+                else if(reflectorQuantity < 5)
+                {
+                    reflectorQuantity += reflectorInitialQuantity;
+                }
+                else if (housingQuantity < 5)
+                {
+                    housingQuantity += housingInitialQuantity;
+                }
+                else if (lensQuantity < 5)
+                {
+                    lensQuantity += lensInitialQuantity;
+                }
+                else if (bulbQuantity < 5)
+                {
+                    bulbQuantity += bulbInitialQuantity;
+                }
+                else if (bezelQuantity < 5)
+                {
+                    bezelQuantity += bezelInitialQuantity;
+                }
             }
-            if ((housingReplenishTime < currentTime) && (housingOrdered))
-            {
-                
-                housingOrdered = false;
-                housingReplenishTime = null;
-                housingQuantity += housingInitialQuantity;
-            }
-            if ((lensReplenishTime < currentTime) && (lensOrdered))
-            {
-
-                lensOrdered = false;
-                lensReplenishTime = null;
-                lensQuantity += lensInitialQuantity;
-            }
-            if ((bulbReplenishTime < currentTime) && (bulbOrdered))
-            {
-                
-                bulbOrdered = false;
-                bulbReplenishTime = null;
-                bulbQuantity += bulbInitialQuantity;
-            }
-            if ((bezelReplenishTime < currentTime) && (bezelOrdered))
-            {
-                
-                bezelOrdered = false;
-                bezelReplenishTime = null;
-                bezelQuantity += bezelInitialQuantity;
-            }
+            
         }
 
+        /// <summary>
+        /// Update progress bar value
+        /// </summary>
+        /// <param name="currentProgress"></param>
+        /// <param name="totalAssemblyTime"></param>
         private void UpdateProgressBar(int currentProgress, int totalAssemblyTime)
         {
             progressBar.Value = currentProgress;
@@ -489,15 +549,16 @@ namespace workstationSimulator
 
 
 
+        /// <summary>
+        /// fog lamp has been completed
+        /// </summary>
         private void FogLampAssemblyCompleted()
         {
             int workstationNumber = 0;
             int.TryParse(workstationInput.Value.ToString(), out workstationNumber);
             fogLampAssemblyCount++;
 
-            LogEvent($"Fog lamp has been assembled: #{fogLampAssemblyCount}");
-
-            LogEvent("Sending fog lamp assembly message to server");
+            LogEvent($"Fog lamp has been assembled: #{fogLampAssemblyCount}");            
 
             UpdatePartQuantities();
 
@@ -511,6 +572,9 @@ namespace workstationSimulator
 
         }
 
+        /// <summary>
+        /// update part quantities
+        /// </summary>
         private void UpdatePartQuantities()
         {
             //decrement all part quantities by 1
@@ -523,6 +587,11 @@ namespace workstationSimulator
 
         }
 
+
+        /// <summary>
+        /// check if fog lamp can be completed
+        /// </summary>
+        /// <returns></returns>
         private bool CanFogLampBeAssembled()
         {
             if (harnessQuantity < 1)
@@ -552,51 +621,8 @@ namespace workstationSimulator
 
             return true;
         }
-        private void CheckPartQuantity()
-        {
-            if ((harnessQuantity < 6) && (!harnessOrdered))
-            {
-                RequestPartFromRunner("harness");
-                harnessOrdered = true;
-                harnessReplenishTime = DateTime.Now.AddMinutes(5/timeScale);
+        
 
-            }
-            if ((reflectorQuantity < 6) && (!reflectorOrdered))
-            {
-                RequestPartFromRunner("reflector");
-                reflectorOrdered = true;
-                reflectorReplenishTime = DateTime.Now.AddMinutes(5 / timeScale);
-            }
-            if ((housingQuantity < 6) && (!housingOrdered))
-            {
-                RequestPartFromRunner("housing");
-                housingOrdered = true;
-                housingReplenishTime = DateTime.Now.AddMinutes(5 / timeScale);
-            }
-            if ((lensQuantity < 6) && (!lensOrdered))
-            {
-                RequestPartFromRunner("lens");
-                lensOrdered = true;
-                lensReplenishTime = DateTime.Now.AddMinutes(5 / timeScale);
-            }
-            if( (bulbQuantity < 6) && (!bulbOrdered))
-            {
-                RequestPartFromRunner("bulb");
-                bulbOrdered = true;
-                bulbReplenishTime = DateTime.Now.AddMinutes(5 / timeScale);
-            }
-            if ((bezelQuantity < 6) && (!bezelOrdered))
-            {
-                RequestPartFromRunner("bezel");
-                bezelOrdered = true;
-                bezelReplenishTime = DateTime.Now.AddMinutes(5 / timeScale);
-            }
-        }
-
-        private void RequestPartFromRunner(string partName)
-        {
-            ExecuteNonQueryCommand($"[dbo].[RequestPartFromRunner] '{partName}', '{workstationInput.Value}'");
-        }
 
         // This is the method to run when the timer is raised.
         private static void TimerEventProcessor(Object myObject,
@@ -608,6 +634,9 @@ namespace workstationSimulator
             exitFlag = true;
         }
 
+        /// <summary>
+        /// get parts
+        /// </summary>
         private void GetParts()
         {
 
