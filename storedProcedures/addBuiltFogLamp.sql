@@ -13,7 +13,9 @@ BEGIN TRY
 	
 	INSERT INTO dbo.BuiltFogLampsTable(workStationNumber, workerSkill, timeBuilt, test_pass_status)
 	VALUES (@workStationNumber, @workerSkill, GETDATE() ,@test_pass_status);
-	
+
+	DECLARE @lampID int = (SELECT MAX(PK_fog_lamp_id) FROM BuiltFogLampsTable);
+	EXEC AddLampToTestTray @lampID;	
 	
 END TRY
 

@@ -1,9 +1,6 @@
-
 USE asqlKanban;
 
-GO
-
---  DROP TABLE IF EXISTS ConfigurationTable;
+DROP TABLE IF EXISTS ConfigurationTable;
 CREATE TABLE ConfigurationTable (
 	PK_configurationID INT IDENTITY(1,1) PRIMARY KEY,	
 	harnessQuantity INT NOT NULL,
@@ -22,5 +19,4 @@ CREATE TABLE ConfigurationTable (
 	normalAssemblyTime INT NOT NULL,
 	experiencedAssemblyTime INT NOT NULL,
 	timeScale INT NOT NULL
-
 );
