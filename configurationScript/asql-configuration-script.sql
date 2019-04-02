@@ -1,8 +1,7 @@
-DROP DATABASE IF EXISTS asqlKanban;
-CREATE DATABASE asqlKanban;
 
 USE asqlKanban;
 
+GO
 
 --  DROP TABLE IF EXISTS ConfigurationTable;
 CREATE TABLE ConfigurationTable (

@@ -28,6 +28,8 @@ namespace workstationSimulator
 
         private int testTraySize { get; set; }
 
+        private double defectRate { get; set; }
+
 
         private int harnessInitialQuantity { get; set; }
         private int reflectorInitialQuantity { get; set; }
@@ -92,20 +94,51 @@ namespace workstationSimulator
             //get test tray size
             GetTestTraySize();
 
+            GetDefectRate();
+
 
         }
 
         private void SendTestTray()
-        {            
+        {
+            Random rnd = new Random();
 
             for (int i = 0; i < fogLampAssemblyCount; i++)
             {
-                //perform insert into table here
-                ExecuteNonQueryCommand("stored procedure name");
+                //determine if current fog lamp has failed                
+                bool testStatus = CheckIfFogLampPassedTest(rnd);
+
+                if (testStatus)
+                {
+                    ExecuteNonQueryCommand($"[dbo].[AddBuiltFogLamp] '{numberOfWorkstations}' , '{employeeSkillInput.Text.ToString()}' , '1'");
+                }
+                else
+                {
+                    ExecuteNonQueryCommand($"[dbo].[AddBuiltFogLamp] '{numberOfWorkstations}' , '{employeeSkillInput.Text.ToString()}' , '0'");
+                }
+                
             }
 
             //reset count
             fogLampAssemblyCount = 0;
+        }
+
+        private bool CheckIfFogLampPassedTest(Random inputRandom)
+        {
+            double currentEmployeeDefectRate = defectRate * 100;
+            double randomNumber = 0;
+
+            randomNumber = inputRandom.Next(1, 1000);
+
+            if (randomNumber < currentEmployeeDefectRate)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
         }
 
         private void GetWorkStationCount()
@@ -160,6 +193,46 @@ namespace workstationSimulator
             }
         }
 
+        private void GetDefectRate()
+        {
+            double returnDouble = 0;
+            string employeeSkill = employeeSkillInput.Text.ToString();
+
+            try
+            {
+                using (OleDbConnection connection = new OleDbConnection(this.sourceConnectionString))
+                {
+                    OleDbCommand command = new OleDbCommand($"[dbo].[GetDefectRate] '{employeeSkill}'", connection);
+
+                    connection.Open();
+                    OleDbDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        string returnValue = reader[0].ToString();
+                        double.TryParse(returnValue, out returnDouble);
+                        defectRate = returnDouble;
+                    }
+                    reader.Close();
+
+                }
+            }
+            catch (Exception e)
+            {
+                LogEvent(e.ToString());
+            }            
+
+            if (returnDouble == -1)
+            {
+                LogEvent("Error getting employee defect rate from database server");
+            }
+            else
+            {
+                this.defectRate = returnDouble;
+                LogEvent($"Employee defect rate: {defectRate}");
+            }
+        }
+
 
         private void GetTestTraySize()
         {
@@ -188,7 +261,7 @@ namespace workstationSimulator
                 using (OleDbConnection connection = new OleDbConnection(this.sourceConnectionString))
                 {
                     connection.Open();
-                    OleDbCommand command = new
+                   OleDbCommand command = new
                         OleDbCommand(inputCommand, connection);
                     command.ExecuteNonQuery();
 
