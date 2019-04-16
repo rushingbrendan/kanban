@@ -23,6 +23,7 @@ using System.Windows.Forms;
 using System.Data.OleDb;
 using System.Configuration;
 using System.Threading;
+using System.Data.SqlClient; //T: For SQL DB
 
 namespace workstationSimulator
 {
@@ -226,39 +227,71 @@ namespace workstationSimulator
             double returnDouble = 0;
             string employeeSkill = employeeSkillInput.Text.ToString();
 
+            SqlConnectionStringBuilder connStringBuild = new SqlConnectionStringBuilder();
+
+            connStringBuild.DataSource = "tcp:kanban.database.windows.net,1433";
+            connStringBuild.UserID = "SetUser3"; //standard Username
+            connStringBuild.Password = "Conestoga1"; //standard Password
+            connStringBuild.InitialCatalog = "kanban"; //inital DB
+
             try
             {
-                using (OleDbConnection connection = new OleDbConnection(this.sourceConnectionString))
+
+                using (SqlConnection sqlConnection = new SqlConnection(connStringBuild.ConnectionString))
                 {
-                    OleDbCommand command = new OleDbCommand($"[dbo].[GetDefectRate] '{employeeSkill}'", connection);
 
-                    connection.Open();
-                    OleDbDataReader reader = command.ExecuteReader();
 
-                    while (reader.Read())
-                    {
-                        string returnValue = reader[0].ToString();
-                        double.TryParse(returnValue, out returnDouble);
-                        defectRate = returnDouble;
-                    }
-                    reader.Close();
+                    sqlConnection.Open();                    
+                    SqlCommand searchCommand = new SqlCommand($"[dbo].[GetDefectRate] '{employeeSkill}'", sqlConnection);
+                    //reader = searchCommand.ExecuteReader();
+                    int returnCode = searchCommand.ExecuteNonQuery();
 
+
+
+                    //var data = new Patient(reader[1].ToString(), reader[2].ToString(), reader[4].ToString(), "July", "10", "1992", "M");
+                    sqlConnection.Close();
+                    
                 }
             }
-            catch (Exception e)
-            {
-                LogEvent(e.ToString());
-            }            
 
-            if (returnDouble == -1)
+            catch (SqlException ex)
             {
-                LogEvent("Error getting employee defect rate from database server");
+
             }
-            else
-            {
-                this.defectRate = returnDouble;
-                LogEvent($"Employee defect rate: {defectRate}");
-            }
+
+            //try
+            //{
+            //    using (OleDbConnection connection = new OleDbConnection(this.sourceConnectionString))
+            //    {
+            //        OleDbCommand command = new OleDbCommand($"[dbo].[GetDefectRate] '{employeeSkill}'", connection);
+
+            //        connection.Open();
+            //        OleDbDataReader reader = command.ExecuteReader();
+
+            //        while (reader.Read())
+            //        {
+            //            string returnValue = reader[0].ToString();
+            //            double.TryParse(returnValue, out returnDouble);
+            //            defectRate = returnDouble;
+            //        }
+            //        reader.Close();
+
+            //    }
+            //}
+            //catch (Exception e)
+            //{
+            //    LogEvent(e.ToString());
+            //}            
+
+            //if (returnDouble == -1)
+            //{
+            //    LogEvent("Error getting employee defect rate from database server");
+            //}
+            //else
+            //{
+            //    this.defectRate = returnDouble;
+            //    LogEvent($"Employee defect rate: {defectRate}");
+            //}
         }
 
 
@@ -289,23 +322,56 @@ namespace workstationSimulator
         /// <param name="inputCommand"></param>
         /// <returns></returns>
         private int ExecuteNonQueryCommand(string inputCommand)
-        {            
+        {
+
+            SqlConnectionStringBuilder connStringBuild = new SqlConnectionStringBuilder();
+
+            connStringBuild.DataSource = "tcp:kanban.database.windows.net,1433";
+            connStringBuild.UserID = "SetUser3"; //standard Username
+            connStringBuild.Password = "Conestoga1"; //standard Password
+            connStringBuild.InitialCatalog = "kanban"; //inital DB
+
             try
             {
-                using (OleDbConnection connection = new OleDbConnection(this.sourceConnectionString))
-                {
-                    connection.Open();
-                   OleDbCommand command = new
-                        OleDbCommand(inputCommand, connection);
-                    command.ExecuteNonQuery();
 
-                    return 0;
+                using (SqlConnection sqlConnection = new SqlConnection(connStringBuild.ConnectionString))
+                {
+
+
+                    sqlConnection.Open();
+                    SqlCommand searchCommand = new SqlCommand(inputCommand, sqlConnection);
+                    //reader = searchCommand.ExecuteReader();
+                    int returnCode = searchCommand.ExecuteNonQuery();
+
+
+
+                    //var data = new Patient(reader[1].ToString(), reader[2].ToString(), reader[4].ToString(), "July", "10", "1992", "M");
+                    sqlConnection.Close();
+                    return returnCode;
                 }
             }
-            catch
+
+            catch (SqlException ex)
             {
                 return -1;
             }
+
+            //try
+            //{
+            //    using (OleDbConnection connection = new OleDbConnection(this.sourceConnectionString))
+            //    {
+            //        connection.Open();
+            //       OleDbCommand command = new
+            //            OleDbCommand(inputCommand, connection);
+            //        command.ExecuteNonQuery();
+
+            //        return 0;
+            //    }
+            //}
+            //catch
+            //{
+            //    return -1;
+            //}
 
         }
 
@@ -316,31 +382,72 @@ namespace workstationSimulator
         /// <returns></returns>
         private int ExecuteDataReader(string inputQuery)
         {
+            //int returnInteger = 0;
+            //try
+            //{
+            //    using (OleDbConnection connection = new OleDbConnection(this.sourceConnectionString))
+            //    {
+            //        OleDbCommand command = new OleDbCommand(inputQuery, connection);
+
+            //        connection.Open();
+            //        OleDbDataReader reader = command.ExecuteReader();
+
+            //        while (reader.Read())
+            //        {
+            //            string returnValue = reader[0].ToString();
+            //            int.TryParse(returnValue, out returnInteger);
+            //        }
+            //        reader.Close();
+            //        return returnInteger;
+            //    }
+            //}
+            //catch (Exception e)
+            //{
+            //    return -1;
+            //}
+
+
+            SqlConnectionStringBuilder connStringBuild = new SqlConnectionStringBuilder();
+
+            connStringBuild.DataSource = "tcp:kanban.database.windows.net,1433";
+            connStringBuild.UserID = "SetUser3"; //standard Username
+            connStringBuild.Password = "Conestoga1"; //standard Password
+            connStringBuild.InitialCatalog = "kanban"; //inital DB
+            SqlDataReader reader = null;
+
             int returnInteger = 0;
+
+
+
             try
             {
-                using (OleDbConnection connection = new OleDbConnection(this.sourceConnectionString))
+
+                using (SqlConnection sqlConnection = new SqlConnection(connStringBuild.ConnectionString))
                 {
-                    OleDbCommand command = new OleDbCommand(inputQuery, connection);
 
-                    connection.Open();
-                    OleDbDataReader reader = command.ExecuteReader();
 
+                    sqlConnection.Open();
+                    SqlCommand searchCommand = new SqlCommand(inputQuery, sqlConnection);
+                    reader = searchCommand.ExecuteReader();
+                    //reader = searchCommand.ExecuteNonQuery();
                     while (reader.Read())
                     {
                         string returnValue = reader[0].ToString();
                         int.TryParse(returnValue, out returnInteger);
                     }
-                    reader.Close();
+
+                    sqlConnection.Close();
                     return returnInteger;
                 }
             }
-            catch (Exception e)
+
+            catch (SqlException ex)
             {
                 return -1;
             }
-        
-            
+
+
+
         }
 
 
@@ -640,14 +747,56 @@ namespace workstationSimulator
         private void GetParts()
         {
 
+            
+            SqlConnectionStringBuilder connStringBuild = new SqlConnectionStringBuilder();
+
+            connStringBuild.DataSource = "tcp:kanban.database.windows.net,1433";
+            connStringBuild.UserID = "SetUser3"; //standard Username
+            connStringBuild.Password = "Conestoga1"; //standard Password
+            connStringBuild.InitialCatalog = "kanban"; //inital DB
+
+            SqlDataReader reader = null;
+
+
+
+            //try
+            //{
+
+            //    using (SqlConnection sqlConnection = new SqlConnection(connStringBuild.ConnectionString))
+            //    {
+
+
+            //        sqlConnection.Open();
+            //        SqlCommand searchCommand = new SqlCommand(inputQuery, sqlConnection);
+            //        //reader = searchCommand.ExecuteReader();
+            //        int returnCode = searchCommand.ExecuteNonQuery();
+
+
+
+            //        //var data = new Patient(reader[1].ToString(), reader[2].ToString(), reader[4].ToString(), "July", "10", "1992", "M");
+            //        sqlConnection.Close();
+            //        return 0;
+            //    }
+            //}
+
+            //catch (SqlException ex)
+            //{
+            //    return -1;
+            //}
+
             try
             {
-                using (OleDbConnection connection = new OleDbConnection(this.sourceConnectionString))
+                using (SqlConnection sqlConnection = new SqlConnection(connStringBuild.ConnectionString))
                 {
-                    OleDbCommand command = new OleDbCommand(("[dbo].[GetPartQuantities]".ToString()), connection);
+                    //OleDbCommand command = new OleDbCommand(("[dbo].[GetPartQuantities]".ToString()), connection);
 
-                    connection.Open();
-                    OleDbDataReader reader = command.ExecuteReader();
+                    //connection.Open();
+                    //OleDbDataReader reader = command.ExecuteReader();
+
+                    sqlConnection.Open();
+                    SqlCommand searchCommand = new SqlCommand(("[dbo].[GetPartQuantities]".ToString()), sqlConnection);
+                    reader = searchCommand.ExecuteReader();
+
 
                     while (reader.Read())
                     {
@@ -696,8 +845,9 @@ namespace workstationSimulator
 
 
                     }
-                    reader.Close();
-                    
+                    //reader.Close();
+                    sqlConnection.Close();
+
                 }
             }
             catch (Exception e)
