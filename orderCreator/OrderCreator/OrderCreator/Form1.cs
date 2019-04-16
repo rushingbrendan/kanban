@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
 using System.Configuration;
+using System.Data.SqlClient; //T: For SQL DB
+
+
 
 namespace OrderCreator
 {
@@ -31,61 +34,55 @@ namespace OrderCreator
 
 
 
-        private int ExecuteNonQueryCommand(string inputCommand)
-        {
-            try
-            {
-                using (OleDbConnection connection = new OleDbConnection(this.sourceConnectionString))
-                {
-                    connection.Open();
-                    OleDbCommand command = new
-                        OleDbCommand(inputCommand, connection);
-                    command.ExecuteNonQuery();
-
-                    return 0;
-                }
-            }
-            catch
-            {
-                return -1;
-            }
-
-        }
+   
 
         private int ExecuteDataReader(string inputQuery)
         {
-            int returnInteger = 0;
+            SqlConnectionStringBuilder connStringBuild = new SqlConnectionStringBuilder();
+
+            connStringBuild.DataSource = "tcp:kanban.database.windows.net,1433";
+            connStringBuild.UserID = "SetUser3"; //standard Username
+            connStringBuild.Password = "Conestoga1"; //standard Password
+            connStringBuild.InitialCatalog = "kanban"; //inital DB
+
             try
             {
-                using (OleDbConnection connection = new OleDbConnection(this.sourceConnectionString))
+
+                using (SqlConnection sqlConnection = new SqlConnection(connStringBuild.ConnectionString))
                 {
-                    OleDbCommand command = new OleDbCommand(inputQuery, connection);
 
-                    connection.Open();
-                    OleDbDataReader reader = command.ExecuteReader();
 
-                    while (reader.Read())
-                    {
-                        string returnValue = reader[0].ToString();
-                        int.TryParse(returnValue, out returnInteger);
-                    }
-                    reader.Close();
-                    return returnInteger;
+                    sqlConnection.Open();
+                    string addPatient = inputQuery;
+                    SqlCommand searchCommand = new SqlCommand(addPatient, sqlConnection);
+                    //reader = searchCommand.ExecuteReader();
+                    int returnCode = searchCommand.ExecuteNonQuery();
+
+
+
+                    //var data = new Patient(reader[1].ToString(), reader[2].ToString(), reader[4].ToString(), "July", "10", "1992", "M");
+                    sqlConnection.Close();
+                    return 0;
                 }
             }
-            catch (Exception e)
+        
+            catch (SqlException ex)
             {
                 return -1;
             }
+        //return null;
+        //catch web exception
+    }
 
 
-        }
 
-        /// <summary>
-        /// Log event to log form
-        /// </summary>
-        /// <param name="inputEvent"></param>
-        private void LogEvent(string inputEvent)
+
+
+/// <summary>
+/// Log event to log form
+/// </summary>
+/// <param name="inputEvent"></param>
+private void LogEvent(string inputEvent)
         {
             DateTime currentTime = DateTime.Now;
 

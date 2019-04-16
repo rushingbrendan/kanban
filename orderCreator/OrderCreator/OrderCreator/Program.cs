@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
+//<add key="databaseConnectionString" value="Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa;Password=Conestoga1;Initial Catalog=asqlKanban" />
+
 namespace OrderCreator
 {
     static class Program
