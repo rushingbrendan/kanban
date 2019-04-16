@@ -207,21 +207,53 @@ namespace ConfigurationClient
         /// </summary>
         private void UpdateConfigurationTable()
         {
+
+            SqlConnectionStringBuilder connStringBuild = new SqlConnectionStringBuilder();
+
+            connStringBuild.DataSource = "tcp:kanban.database.windows.net,1433";
+            connStringBuild.UserID = "SetUser3"; //standard Username
+            connStringBuild.Password = "Conestoga1"; //standard Password
+            connStringBuild.InitialCatalog = "kanban"; //inital DB
+
             try
             {
-                using (OleDbConnection connection = new OleDbConnection(sourceConnectionString))
+
+                using (SqlConnection sqlConnection = new SqlConnection(connStringBuild.ConnectionString))
                 {
-                    connection.Open();
-                    OleDbCommand command = new
-                        OleDbCommand(this.queryString, connection);
-                    command.ExecuteNonQuery();
+
+
+                    sqlConnection.Open();
+                    string addPatient = this.queryString;
+                    SqlCommand searchCommand = new SqlCommand(addPatient, sqlConnection);
+                    //reader = searchCommand.ExecuteReader();
+                    int returnCode = searchCommand.ExecuteNonQuery();
+
+
+
+                    //var data = new Patient(reader[1].ToString(), reader[2].ToString(), reader[4].ToString(), "July", "10", "1992", "M");
+                    sqlConnection.Close();
                 }
-                LogEvent("Configuration table in database has been updated");
             }
-            catch (Exception e)
+
+            catch (SqlException ex)
             {
-                LogEvent("Error when updating database configuration table:   " + e);
+                
             }
+            //try
+            //{
+            //    using (OleDbConnection connection = new OleDbConnection(sourceConnectionString))
+            //    {
+            //        connection.Open();
+            //        OleDbCommand command = new
+            //            OleDbCommand(this.queryString, connection);
+            //        command.ExecuteNonQuery();
+            //    }
+            //    LogEvent("Configuration table in database has been updated");
+            //}
+            //catch (Exception e)
+            //{
+            //    LogEvent("Error when updating database configuration table:   " + e);
+            //}
 
         }
 
