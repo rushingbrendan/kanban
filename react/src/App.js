@@ -1,3 +1,12 @@
+/*
+ * 	File            : App.js
+ *  Project         : Kanban Simulator Final Project
+ *  Programmer      : Brendan Rushing
+ *  Date            : April 19, 2019
+ *  Description     : React front end application for kanban dashboard
+ *
+ */
+
 import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header.js';
