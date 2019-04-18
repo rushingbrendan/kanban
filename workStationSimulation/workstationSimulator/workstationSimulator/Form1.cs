@@ -226,6 +226,7 @@ namespace workstationSimulator
         {
             double returnDouble = 0;
             string employeeSkill = employeeSkillInput.Text.ToString();
+            SqlDataReader reader = null;
 
             SqlConnectionStringBuilder connStringBuild = new SqlConnectionStringBuilder();
 
@@ -234,6 +235,7 @@ namespace workstationSimulator
             connStringBuild.Password = "Conestoga1"; //standard Password
             connStringBuild.InitialCatalog = "kanban"; //inital DB
 
+
             try
             {
 
@@ -241,14 +243,18 @@ namespace workstationSimulator
                 {
 
 
-                    sqlConnection.Open();                    
+                    sqlConnection.Open();
                     SqlCommand searchCommand = new SqlCommand($"[dbo].[GetDefectRate] '{employeeSkill}'", sqlConnection);
-                    //reader = searchCommand.ExecuteReader();
-                    int returnCode = searchCommand.ExecuteNonQuery();
+                    reader = searchCommand.ExecuteReader();
+                    //reader = searchCommand.ExecuteNonQuery();
+                    while (reader.Read())
+                    {
+                        string returnValue = reader[0].ToString();
+                        double.TryParse(returnValue, out returnDouble);
 
+                        this.defectRate = returnDouble;
+                    }
 
-
-                    //var data = new Patient(reader[1].ToString(), reader[2].ToString(), reader[4].ToString(), "July", "10", "1992", "M");
                     sqlConnection.Close();
                     
                 }
@@ -256,42 +262,9 @@ namespace workstationSimulator
 
             catch (SqlException ex)
             {
-
+                
             }
 
-            //try
-            //{
-            //    using (OleDbConnection connection = new OleDbConnection(this.sourceConnectionString))
-            //    {
-            //        OleDbCommand command = new OleDbCommand($"[dbo].[GetDefectRate] '{employeeSkill}'", connection);
-
-            //        connection.Open();
-            //        OleDbDataReader reader = command.ExecuteReader();
-
-            //        while (reader.Read())
-            //        {
-            //            string returnValue = reader[0].ToString();
-            //            double.TryParse(returnValue, out returnDouble);
-            //            defectRate = returnDouble;
-            //        }
-            //        reader.Close();
-
-            //    }
-            //}
-            //catch (Exception e)
-            //{
-            //    LogEvent(e.ToString());
-            //}            
-
-            //if (returnDouble == -1)
-            //{
-            //    LogEvent("Error getting employee defect rate from database server");
-            //}
-            //else
-            //{
-            //    this.defectRate = returnDouble;
-            //    LogEvent($"Employee defect rate: {defectRate}");
-            //}
         }
 
 
@@ -356,22 +329,6 @@ namespace workstationSimulator
                 return -1;
             }
 
-            //try
-            //{
-            //    using (OleDbConnection connection = new OleDbConnection(this.sourceConnectionString))
-            //    {
-            //        connection.Open();
-            //       OleDbCommand command = new
-            //            OleDbCommand(inputCommand, connection);
-            //        command.ExecuteNonQuery();
-
-            //        return 0;
-            //    }
-            //}
-            //catch
-            //{
-            //    return -1;
-            //}
 
         }
 
@@ -382,30 +339,6 @@ namespace workstationSimulator
         /// <returns></returns>
         private int ExecuteDataReader(string inputQuery)
         {
-            //int returnInteger = 0;
-            //try
-            //{
-            //    using (OleDbConnection connection = new OleDbConnection(this.sourceConnectionString))
-            //    {
-            //        OleDbCommand command = new OleDbCommand(inputQuery, connection);
-
-            //        connection.Open();
-            //        OleDbDataReader reader = command.ExecuteReader();
-
-            //        while (reader.Read())
-            //        {
-            //            string returnValue = reader[0].ToString();
-            //            int.TryParse(returnValue, out returnInteger);
-            //        }
-            //        reader.Close();
-            //        return returnInteger;
-            //    }
-            //}
-            //catch (Exception e)
-            //{
-            //    return -1;
-            //}
-
 
             SqlConnectionStringBuilder connStringBuild = new SqlConnectionStringBuilder();
 
@@ -417,8 +350,7 @@ namespace workstationSimulator
 
             int returnInteger = 0;
 
-
-
+            
             try
             {
 
@@ -755,34 +687,7 @@ namespace workstationSimulator
             connStringBuild.Password = "Conestoga1"; //standard Password
             connStringBuild.InitialCatalog = "kanban"; //inital DB
 
-            SqlDataReader reader = null;
-
-
-
-            //try
-            //{
-
-            //    using (SqlConnection sqlConnection = new SqlConnection(connStringBuild.ConnectionString))
-            //    {
-
-
-            //        sqlConnection.Open();
-            //        SqlCommand searchCommand = new SqlCommand(inputQuery, sqlConnection);
-            //        //reader = searchCommand.ExecuteReader();
-            //        int returnCode = searchCommand.ExecuteNonQuery();
-
-
-
-            //        //var data = new Patient(reader[1].ToString(), reader[2].ToString(), reader[4].ToString(), "July", "10", "1992", "M");
-            //        sqlConnection.Close();
-            //        return 0;
-            //    }
-            //}
-
-            //catch (SqlException ex)
-            //{
-            //    return -1;
-            //}
+            SqlDataReader reader = null;        
 
             try
             {

@@ -9,14 +9,4 @@ C:\Users\brushing0895\Downloads\kanban\workStationSimulation\workstationSimulato
 C:\Users\brushing0895\Downloads\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.csproj.CoreCompileInputs.cache
 C:\Users\brushing0895\Downloads\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.exe
 C:\Users\brushing0895\Downloads\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.pdb
-C:\kanban\workStationSimulation\workstationSimulator\workstationSimulator\bin\Debug\workstationSimulator.exe.config
 C:\kanban\workStationSimulation\workstationSimulator\workstationSimulator\bin\Debug\workstationSimulator.exe
-C:\kanban\workStationSimulation\workstationSimulator\workstationSimulator\bin\Debug\workstationSimulator.pdb
-C:\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.csprojAssemblyReference.cache
-C:\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.csproj.ResolveComReference.cache
-C:\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.Form1.resources
-C:\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.Properties.Resources.resources
-C:\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.csproj.GenerateResource.cache
-C:\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.csproj.CoreCompileInputs.cache
-C:\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.exe
-C:\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.pdb
