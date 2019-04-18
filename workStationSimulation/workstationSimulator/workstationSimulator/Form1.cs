@@ -106,7 +106,71 @@ namespace workstationSimulator
 
             GetDefectRate();
 
+            SetUpTimer();
 
+        }
+
+        private void SetUpTimer()
+        {
+            const int ONESECOND = 1000;
+            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+            timer.Interval = (ONESECOND * 10);
+            timer.Tick += new EventHandler(TimerTicked);
+            timer.Start();
+        }
+
+        private void TimerTicked(object sender, EventArgs e)
+        {
+            // fill the order
+            FillOrder();
+        }
+
+        private void FillOrder()
+        {
+            string command = $"[dbo].[GetOrderToComplete] ";
+
+            ExecuteNonQueryCommand(command);
+        }
+
+        private int GetLastWorkstation()
+        {
+            string query = "SELECT TOP 1 workstationID FROM dbo.WorkstationParts ORDER BY workstationID DESC;";
+            int id = 0;
+
+            DataTable data = new DataTable();
+            SqlConnectionStringBuilder conString = new SqlConnectionStringBuilder
+            {
+                DataSource = "tcp:kanban.database.windows.net,1433",
+                UserID = "SetUser3", //standard Username
+                Password = "Conestoga1", //standard Password
+                InitialCatalog = "kanban" //inital DB
+            };
+
+            using (SqlConnection conn = new SqlConnection(conString.ConnectionString))
+            {
+                conn.Open();
+
+                try
+                {
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    data.Load(reader);
+
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+
+                foreach (DataRow row in data.Rows)
+                {
+
+                    Int32.TryParse(row["workstationID"].ToString(), out id);
+
+                }
+            }
+
+            return id;
         }
 
         private void AddWorkstationToDB()
@@ -121,14 +185,14 @@ namespace workstationSimulator
                     $"'{bezelQuantity}'";
 
             int ret = ExecuteNonQueryCommand(command);
-            if (ret != -1) { workstationID = ret; }
+            if (ret != -1) { workstationID = GetLastWorkstation(); }
 
         }
 
         private void UpdateWorkstationRecord()
         {
 
-            string command = $"[dbo].[AddWorkstation] " +
+            string command = $"[dbo].[UpdateWorkstation] " +
                     $"'{workstationID}', " +
                     $"'{harnessQuantity}', " +
                     $"'{reflectorQuantity}', " +
@@ -563,17 +627,12 @@ namespace workstationSimulator
                     }
                     UpdateCurrentTime();
 
-
-
-
                 } while (currentAssemblyProgress < totalAssemblyTime);
 
                 //update count and flag
                 exitFlag = false;
-                FogLampAssemblyCompleted();
+                FogLampAssemblyCompleted();        
                 AssembleFogLamp();
-
-                UpdateWorkstationRecord();
             }
             
         }
@@ -611,8 +670,11 @@ namespace workstationSimulator
                 {
                     bezelQuantity += bezelInitialQuantity;
                 }
+
+                UpdateWorkstationRecord();
+
             }
-            
+
         }
 
         /// <summary>
@@ -662,6 +724,9 @@ namespace workstationSimulator
             lensQuantity--;
             bulbQuantity--;
             bezelQuantity--;
+
+            UpdateWorkstationRecord();
+
 
         }
 
