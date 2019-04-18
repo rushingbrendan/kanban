@@ -8,8 +8,7 @@ AS
 BEGIN TRY
 	
 	INSERT INTO dbo.OrderLineTable(timeRequested, quantity)
-	VALUES (GETDATE(), @orderQuantity );
-	
+	VALUES (GETDATE(), @orderQuantity );	
 	
 END TRY
 

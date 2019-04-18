@@ -1,10 +1,9 @@
-USE asqlKanban;
-
-DROP TABLE IF EXISTS OrderLineTable;
-CREATE TABLE OrderLineTable (
-	PK_orderLine_id INT IDENTITY(1,1) PRIMARY KEY,	
-	timeRequested DateTime NOT NULL,
-	quantity INT NOT NULL,
-	quantityBuilt INT NOT NULL DEFAULT(0),
-	complete BIT NOT NULL DEFAULT(0)
+﻿CREATE TABLE [dbo].[OrderLineTable] (
+    [PK_orderLine_id] INT      IDENTITY (1, 1) NOT NULL,
+    [timeRequested]   DATETIME NOT NULL,
+    [quantity]        INT      NOT NULL,
+    [quantityBuilt]   INT      DEFAULT ((0)) NOT NULL,
+    [complete]        BIT      DEFAULT ((0)) NOT NULL,
+    PRIMARY KEY CLUSTERED ([PK_orderLine_id] ASC)
 );
+

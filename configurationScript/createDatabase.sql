@@ -1,2 +1,0 @@
-DROP DATABASE IF EXISTS asqlKanban;
-CREATE DATABASE asqlKanban;

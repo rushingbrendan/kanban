@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE GetOrders(@complete bit = 1)
+﻿CREATE PROCEDURE GetOrders
 
 -- parameters for procedure
 
@@ -7,9 +7,9 @@ AS
 -- begin try (error checking) 
 BEGIN TRY
 
-	SELECT PK_orderLine_id, quantity, quantityBuilt, complete
+	SELECT PK_orderLine_id, quantity, quantityBuilt, complete, timeRequested
 	FROM OrderLineTable
-	WHERE complete=@complete;
+	WHERE PK_orderLine_id > 0
 
 
 END TRY

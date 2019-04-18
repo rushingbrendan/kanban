@@ -12,7 +12,6 @@ BEGIN TRY
 
 	DECLARE @lampID int = (SELECT MAX(PK_fog_lamp_id) FROM BuiltFogLampsTable);
 	EXEC AddLampToTestTray @lampID;	
-	EXEC GetOrderToComplete;
 	
 END TRY
 

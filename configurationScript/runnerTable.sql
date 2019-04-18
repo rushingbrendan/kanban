@@ -1,9 +1,8 @@
-USE asqlKanban;
-
-DROP TABLE IF EXISTS RunnerTable;
-CREATE TABLE RunnerTable (
-	PK_runnerRequest_id INT IDENTITY(1,1) PRIMARY KEY,	
-	timeRequested DateTime NOT NULL,
-	workStationNumber INT NOT NULL,
-	partName varchar(20) NOT NULL
+﻿CREATE TABLE [dbo].[RunnerTable] (
+    [PK_runnerRequest_id] INT          IDENTITY (1, 1) NOT NULL,
+    [timeRequested]       DATETIME     NOT NULL,
+    [workStationNumber]   INT          NOT NULL,
+    [partName]            VARCHAR (20) NOT NULL,
+    PRIMARY KEY CLUSTERED ([PK_runnerRequest_id] ASC)
 );
+

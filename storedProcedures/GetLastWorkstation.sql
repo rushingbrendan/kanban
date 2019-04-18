@@ -1,17 +1,10 @@
-﻿CREATE PROCEDURE AddWorkstation 
-@harnesses int, 
-@reflectors int, 
-@housings int, 
-@lenses int, 
-@bulbs int, 
-@bezels int
+﻿CREATE PROCEDURE GetLastWorkstation 
 AS
 
 -- begin try (error checking) 
 BEGIN TRY
-	
-	INSERT INTO dbo.WorkstationParts(harnesses, reflectors, housings, lenses, bulbs, bezels)
-	VALUES (@harnesses, @reflectors, @housings, @lenses, @bulbs, @bezels);
+
+	SELECT TOP 1 workstationID FROM dbo.WorkstationParts ORDER BY workstationID DESC;
 	
 END TRY
 
