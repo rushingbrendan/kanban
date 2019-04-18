@@ -10,3 +10,14 @@ C:\Users\brushing0895\Downloads\kanban\workStationSimulation\workstationSimulato
 C:\Users\brushing0895\Downloads\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.exe
 C:\Users\brushing0895\Downloads\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.pdb
 C:\kanban\workStationSimulation\workstationSimulator\workstationSimulator\bin\Debug\workstationSimulator.exe
+C:\Users\tlupu7795\Desktop\kanban\workStationSimulation\workstationSimulator\workstationSimulator\bin\Debug\workstationSimulator.exe.config
+C:\Users\tlupu7795\Desktop\kanban\workStationSimulation\workstationSimulator\workstationSimulator\bin\Debug\workstationSimulator.exe
+C:\Users\tlupu7795\Desktop\kanban\workStationSimulation\workstationSimulator\workstationSimulator\bin\Debug\workstationSimulator.pdb
+C:\Users\tlupu7795\Desktop\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.csprojAssemblyReference.cache
+C:\Users\tlupu7795\Desktop\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.csproj.ResolveComReference.cache
+C:\Users\tlupu7795\Desktop\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.Form1.resources
+C:\Users\tlupu7795\Desktop\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.Properties.Resources.resources
+C:\Users\tlupu7795\Desktop\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.csproj.GenerateResource.cache
+C:\Users\tlupu7795\Desktop\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.csproj.CoreCompileInputs.cache
+C:\Users\tlupu7795\Desktop\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.exe
+C:\Users\tlupu7795\Desktop\kanban\workStationSimulation\workstationSimulator\workstationSimulator\obj\Debug\workstationSimulator.pdb

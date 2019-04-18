@@ -22,3 +22,15 @@ C:\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\obj\De
 C:\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\obj\Debug\ConfigurationClient.csproj.CoreCompileInputs.cache
 C:\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\obj\Debug\ConfigurationClient.exe
 C:\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\obj\Debug\ConfigurationClient.pdb
+C:\Users\tlupu7795\Desktop\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\bin\Debug\ConfigurationClient.exe.config
+C:\Users\tlupu7795\Desktop\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\bin\Debug\ConfigurationClient.exe
+C:\Users\tlupu7795\Desktop\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\bin\Debug\ConfigurationClient.pdb
+C:\Users\tlupu7795\Desktop\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\obj\Debug\ConfigurationClient.csprojAssemblyReference.cache
+C:\Users\tlupu7795\Desktop\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\obj\Debug\Interop.MSDASC.dll
+C:\Users\tlupu7795\Desktop\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\obj\Debug\ConfigurationClient.csproj.ResolveComReference.cache
+C:\Users\tlupu7795\Desktop\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\obj\Debug\ConfigurationClient.Form1.resources
+C:\Users\tlupu7795\Desktop\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\obj\Debug\ConfigurationClient.Properties.Resources.resources
+C:\Users\tlupu7795\Desktop\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\obj\Debug\ConfigurationClient.csproj.GenerateResource.cache
+C:\Users\tlupu7795\Desktop\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\obj\Debug\ConfigurationClient.csproj.CoreCompileInputs.cache
+C:\Users\tlupu7795\Desktop\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\obj\Debug\ConfigurationClient.exe
+C:\Users\tlupu7795\Desktop\kanban\configurationClientForm\ConfigurationClient\ConfigurationClient\obj\Debug\ConfigurationClient.pdb
