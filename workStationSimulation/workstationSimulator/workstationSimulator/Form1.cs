@@ -44,6 +44,7 @@ namespace workstationSimulator
 
         private double defectRate { get; set; }
 
+        private int workstationID { get; set; }
 
         private int harnessInitialQuantity { get; set; }
         private int reflectorInitialQuantity { get; set; }
@@ -107,6 +108,39 @@ namespace workstationSimulator
 
 
         }
+
+        private void AddWorkstationToDB()
+        {
+            
+            string command = $"[dbo].[AddWorkstation] " +
+                    $"'{harnessQuantity}', " +
+                    $"'{reflectorQuantity}', " +
+                    $"'{housingQuantity}', " +
+                    $"'{lensQuantity}', " +
+                    $"'{bulbQuantity}', " +
+                    $"'{bezelQuantity}'";
+
+            int ret = ExecuteNonQueryCommand(command);
+            if (ret != -1) { workstationID = ret; }
+
+        }
+
+        private void UpdateWorkstationRecord()
+        {
+
+            string command = $"[dbo].[AddWorkstation] " +
+                    $"'{workstationID}', " +
+                    $"'{harnessQuantity}', " +
+                    $"'{reflectorQuantity}', " +
+                    $"'{housingQuantity}', " +
+                    $"'{lensQuantity}', " +
+                    $"'{bulbQuantity}', " +
+                    $"'{bezelQuantity}'";
+
+            ExecuteNonQueryCommand(command);
+
+        }
+
 
         /// <summary>
         /// send test tray to database server
@@ -410,6 +444,9 @@ namespace workstationSimulator
             //enable stop button
             stopButton.Enabled = true;
 
+            // add the workstation to the database
+            AddWorkstationToDB();
+
             //get assembly time
             GetAssemblyTime();
             assemblyTimeLabel.Text = assemblyTime.ToString();
@@ -535,6 +572,8 @@ namespace workstationSimulator
                 exitFlag = false;
                 FogLampAssemblyCompleted();
                 AssembleFogLamp();
+
+                UpdateWorkstationRecord();
             }
             
         }

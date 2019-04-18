@@ -1,8 +1,4 @@
-
-
-DROP PROCEDURE IF EXISTS GetPartQuantities
-GO
-CREATE PROCEDURE GetPartQuantities
+﻿CREATE PROCEDURE GetPartQuantities
 
 -- parameters for procedure
 

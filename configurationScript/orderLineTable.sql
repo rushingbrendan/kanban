@@ -5,6 +5,6 @@ CREATE TABLE OrderLineTable (
 	PK_orderLine_id INT IDENTITY(1,1) PRIMARY KEY,	
 	timeRequested DateTime NOT NULL,
 	quantity INT NOT NULL,
-	quantityBuilt INT,
-	complete BIT
+	quantityBuilt INT NOT NULL DEFAULT(0),
+	complete BIT NOT NULL DEFAULT(0)
 );

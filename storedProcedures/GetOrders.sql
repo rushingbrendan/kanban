@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE PlaceOrder(@orderQuantity int)
+﻿CREATE PROCEDURE GetOrders(@complete bit = 1)
 
 -- parameters for procedure
 
@@ -6,11 +6,12 @@ AS
 
 -- begin try (error checking) 
 BEGIN TRY
-	
-	INSERT INTO dbo.OrderLineTable(timeRequested, quantity)
-	VALUES (GETDATE(), @orderQuantity );
-	
-	
+
+	SELECT PK_orderLine_id, quantity, quantityBuilt, complete
+	FROM OrderLineTable
+	WHERE complete=@complete;
+
+
 END TRY
 
 -- catch any errors
@@ -22,6 +23,3 @@ BEGIN CATCH
 	ErrorSeverity= ERROR_SEVERITY(), 
 	ErrorState= ERROR_STATE()
 END CATCH
-
--- end
-RETURN 0

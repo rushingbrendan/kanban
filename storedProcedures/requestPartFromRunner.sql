@@ -1,8 +1,4 @@
-
-
-DROP PROCEDURE IF EXISTS RequestPartFromRunner
-GO
-CREATE PROCEDURE RequestPartFromRunner(@partName varchar(20), @workStationNumber int)
+﻿CREATE PROCEDURE RequestPartFromRunner(@partName varchar(20), @workStationNumber int)
 
 -- parameters for procedure
 

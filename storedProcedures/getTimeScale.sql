@@ -1,8 +1,4 @@
-
-
-DROP PROCEDURE IF EXISTS GetTimeScale
-GO
-CREATE PROCEDURE GetTimeScale
+﻿CREATE PROCEDURE GetTimeScale
 
 -- parameters for procedure
 

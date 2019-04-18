@@ -1,8 +1,4 @@
-
-
-DROP PROCEDURE IF EXISTS GetDefectRate
-GO
-CREATE PROCEDURE GetDefectRate(@employeeTimeInput nchar(20))
+﻿CREATE PROCEDURE GetDefectRate(@employeeTimeInput nchar(20))
 
 -- parameters for procedure
 

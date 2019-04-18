@@ -1,8 +1,4 @@
-
-
-DROP PROCEDURE IF EXISTS AddBuiltFogLamp
-GO
-CREATE PROCEDURE AddBuiltFogLamp(@workStationNumber int, @workerSkill varchar(20), @test_pass_status bit )
+﻿CREATE PROCEDURE AddBuiltFogLamp(@workStationNumber int, @workerSkill varchar(20), @test_pass_status bit )
 
 -- parameters for procedure
 
@@ -16,6 +12,7 @@ BEGIN TRY
 
 	DECLARE @lampID int = (SELECT MAX(PK_fog_lamp_id) FROM BuiltFogLampsTable);
 	EXEC AddLampToTestTray @lampID;	
+	EXEC GetOrderToComplete;
 	
 END TRY
 

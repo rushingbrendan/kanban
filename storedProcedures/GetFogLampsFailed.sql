@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE PlaceOrder(@orderQuantity int)
+﻿CREATE PROCEDURE GetFogLampsFailed
 
 -- parameters for procedure
 
@@ -7,10 +7,11 @@ AS
 -- begin try (error checking) 
 BEGIN TRY
 	
-	INSERT INTO dbo.OrderLineTable(timeRequested, quantity)
-	VALUES (GETDATE(), @orderQuantity );
-	
-	
+	SELECT COUNT([dbo].BuiltFogLampsTable.PK_fog_lamp_id) AS fogLampCount
+	FROM BuiltFogLampsTable
+	WHERE BuiltFogLampsTable.test_pass_status = 0;
+
+
 END TRY
 
 -- catch any errors

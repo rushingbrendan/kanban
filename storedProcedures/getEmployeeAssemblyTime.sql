@@ -1,8 +1,4 @@
-
-
-DROP PROCEDURE IF EXISTS GetEmployeeAssemblyTime
-GO
-CREATE PROCEDURE GetEmployeeAssemblyTime(@employeeTimeInput varchar(20))
+﻿CREATE PROCEDURE GetEmployeeAssemblyTime(@employeeTimeInput varchar(20))
 
 -- parameters for procedure
 

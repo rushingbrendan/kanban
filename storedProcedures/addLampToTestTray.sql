@@ -1,6 +1,4 @@
-DROP PROCEDURE IF EXISTS AddLampToTestTray
-GO
-CREATE PROCEDURE AddLampToTestTray(@fogLampID int)
+﻿CREATE PROCEDURE AddLampToTestTray(@fogLampID int)
 
 -- parameters for procedure
 

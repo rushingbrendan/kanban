@@ -1,8 +1,4 @@
-
-
-DROP PROCEDURE IF EXISTS GetTestTraySize
-GO
-CREATE PROCEDURE GetTestTraySize
+﻿CREATE PROCEDURE GetTestTraySize
 
 -- parameters for procedure
 

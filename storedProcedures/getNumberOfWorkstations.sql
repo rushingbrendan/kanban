@@ -1,8 +1,4 @@
-
-
-DROP PROCEDURE IF EXISTS GetNumberOfWorkStations
-GO
-CREATE PROCEDURE GetNumberOfWorkStations
+﻿CREATE PROCEDURE GetNumberOfWorkStations
 
 -- parameters for procedure
 
